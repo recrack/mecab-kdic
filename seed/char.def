@@ -1,4 +1,4 @@
-# 이 파일은 naist dic 에서 가져왔다. HANGEUL 관련하여 3줄을 추가 하였다.
+# 이 파일은 naist dic 에서 가져왔다. HANGEUL 관련하여 3줄을 추가하였다.
 # TODO 추후 nfd nfc 방식의 사전을 만들 경우 NANGEUL 자모 관련하여 
 # UCS 값을 추가해야 하는지 검토해야 한다.
 #
