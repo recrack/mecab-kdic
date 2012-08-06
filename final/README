@@ -1,0 +1,3 @@
+이 디렉토리에는 자동 생성된 파일들이 위치합니다.
+make clean 할 경우 *.dic *.bin *.def *.csv dicrc model model.txt 등이
+삭제되니 손으로 작성한 파일을 이곳에 위치하지 마세요.
