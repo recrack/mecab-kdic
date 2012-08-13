@@ -9,10 +9,9 @@ MeCab 용 한국어 사전입니다.
     cd kdic
     make
 
-make 하고 나면 tagged-text 파일로부터 ./corpus ./seed/kdic.csv
-pos-id-gen.rb 로부터 ./final/pos-id.def ./seed/pos-id.def 파일이 생성됩니다.
-
 seed 디렉토리에는 사전을 생성하기 위한 필수 파일이 위치합니다.
+make 하면 tagged-text 파일로부터 ./corpus ./seed/kdic.csv 가 생성되고
+./final/pos-id.def ./seed/pos-id.def 파일이 생성됩니다.
 final 디렉토리에는 최종 생성된 사전이 위치합니다.
 
 make 로 생성된 파일을 제거하기 위해서는
