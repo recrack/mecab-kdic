@@ -7,6 +7,6 @@
 
 # %F[0..N] Unigram 문맥
 
-# %F[n] : UNIGRAM의 n 번째 소성(素性)으로 전개됩니다.
+# %F[n] : UNIGRAM의 n번째 소성(素性)으로 전개됩니다.
 # POS Unigram
 UNIGRAM U1:%F[0]
