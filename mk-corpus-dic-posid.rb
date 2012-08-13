@@ -3,7 +3,7 @@
 
 # tagged-text 로부터 MeCab용 corpus, kdic.csv를 만드는 소스
 
-R_COL_SIZE = 3
+R_COL_SIZE = 4
 
 # 세종 태그
 POS_TABLE = {
@@ -117,6 +117,7 @@ POS_TABLE = {
 
     "대명사+관형격조사" => "대명사+관형격조사",
     "선어말어미+관형형전성어미" => "선어말어미+관형형전성어미",
+    "선어말어미+종결어미" => "선어말어미+종결어미",
 }
 
 lines = []
@@ -151,9 +152,12 @@ File.open("./corpus", "w") do |corpus_file|
     end
 end
 
+p lines
 # 중복 제거, 정렬, kdic.csv 파일 쓰기
 File.open("./seed/kdic.csv", "w") do |f|
-    f.puts(lines.uniq!.sort!)
+    lines.uniq!
+    lines.sort!
+    f.puts(lines)
 end
 
 # pos-id.def 만들기
