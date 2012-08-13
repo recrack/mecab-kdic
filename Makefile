@@ -1,5 +1,5 @@
 all:
-	./mk-corpus-dic.rb
+	./mk-corpus-dic-posid.rb
 	cd seed && make && cd ../final && make
 
 clean:
