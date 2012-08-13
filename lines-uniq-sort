@@ -1,0 +1,14 @@
+#!/usr/bin/ruby
+# coding: utf-8
+
+# 파일 내 중복 라인 제거, 정렬, 파일 쓰기
+
+lines = ""
+
+File.open(ARGV[0],"r") do |f|
+	lines = f.readlines.uniq.sort
+end
+
+File.open(ARGV[0], "w") do |f|
+	f.puts(lines)
+end
