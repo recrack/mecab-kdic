@@ -7,15 +7,15 @@ R_COL_SIZE = 3
 
 # 세종 태그
 POS_TABLE = {
-	# 체언
-		# 명사
-	"일반명사" => "체언,명사,일반명사", # NNG
-	"고유명사" => "체언,명사,고유명사", # NNP
-	"의존명사" => "체언,명사,의존명사", # NNB
-		# 대명사
-	"대명사"   => "체언,대명사", # NP
-		# 수사
-	"수사"     => "체언,수사", # NR
+    # 체언
+        # 명사
+    "일반명사" => "체언,명사,일반명사", # NNG
+    "고유명사" => "체언,명사,고유명사", # NNP
+    "의존명사" => "체언,명사,의존명사", # NNB
+        # 대명사
+    "대명사"   => "체언,대명사", # NP
+        # 수사
+    "수사"     => "체언,수사", # NR
     # 용언
         # 동사
     "동사"       => "용언,동사", #VV
@@ -123,35 +123,43 @@ lines = []
 
 File.open("./corpus", "w") do |corpus_file|
     File.open("tagged-text", "r").each_line do |line|
-	    left, right = line.split("\t")
-	    if left == "EOS\n"
-	        # corpus file 에 출력
-		    corpus_file.puts "EOS"
-		    next
-	    end
+        left, right = line.split("\t")
+        if left == "EOS\n"
+            # corpus file 에 출력
+            corpus_file.puts "EOS"
+            next
+        end
 
-	    right.strip!
-	    right = right.split(",")
-	    pos = right[0]
+        right.strip!
+        right = right.split(",")
+        pos = right[0]
 
         if right[1..-1].join(",").empty?
-	        right = POS_TABLE[pos]
-	    else
-	        right = POS_TABLE[pos] + "," + right[1..-1].join(",")
-	    end
+            right = POS_TABLE[pos]
+        else
+            right = POS_TABLE[pos] + "," + right[1..-1].join(",")
+        end
 
-	    # corpus file 에 출력
-	    corpus_file.puts(left + "\t" + right + ",*" * (R_COL_SIZE - right.count(",") - 1))
-	
-	    # kdic.csv 를 위한 문자열 생성
-	    # 쉽표(,) 제거, "0,0,0" 추가
-	    unless left.include?(",")
-	        lines << (left + ",0,0,0," + right + ",*" * (R_COL_SIZE - right.count(",") - 1))
-	    end
+        # corpus file 에 출력
+        corpus_file.puts(left + "\t" + right + ",*" * (R_COL_SIZE - right.count(",") - 1))
+    
+        # kdic.csv 를 위한 문자열 생성
+        # 쉽표(,) 제거, "0,0,0" 추가
+        unless left.include?(",")
+            lines << (left + ",0,0,0," + right + ",*" * (R_COL_SIZE - right.count(",") - 1))
+        end
     end
 end
 
 # 중복 제거, 정렬, kdic.csv 파일 쓰기
 File.open("./seed/kdic.csv", "w") do |f|
-	f.puts(lines.uniq!.sort!)
+    f.puts(lines.uniq!.sort!)
 end
+
+# pos-id.def 만들기
+File.open("./seed/pos-id.def", "w") do |f|
+    POS_TABLE.each_with_index do |a, i|
+        f.puts a[1] + ",*"*(R_COL_SIZE-a[1].count(",")-1) + " " + i.to_s
+    end
+end
+`cp ./seed/pos-id.def ./final/pos-id.def`
